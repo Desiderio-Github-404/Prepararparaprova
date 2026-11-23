@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { CHECKOUT_URL, VSL_VIDEO_PATH, VSL_POSTER_PATH } from "./config";
+import { CHECKOUT_URL, VSL_VIDEO_PATH, VSL_POSTER_PATH, VSL_UNLOCK_SECONDS } from "./config";
 
 const benefits = [
   { number: "01", title: "Estuda com direcção", text: "Deixa de estudar sem saber por onde começar. Organiza o teu esforço em torno do que realmente precisas de dominar." },
@@ -25,16 +25,12 @@ export default function App() {
   const [openFaq, setOpenFaq] = useState(0);
   const checkoutReady = Boolean(CHECKOUT_URL.trim());
 
-  useEffect(() => {
-    if (progress >= 90) setUnlocked(true);
-  }, [progress]);
-
   const handleTimeUpdate = () => {
     const video = videoRef.current;
     if (!video || !Number.isFinite(video.duration) || video.duration <= 0) return;
     const next = Math.min(100, (video.currentTime / video.duration) * 100);
     setProgress(next);
-    if (next >= 90) setUnlocked(true);
+    if (video.currentTime >= VSL_UNLOCK_SECONDS) setUnlocked(true);
   };
 
   const goToCheckout = () => {
@@ -54,7 +50,7 @@ export default function App() {
           <div className="eyebrow"><span className="eyebrow-line" /> MENTORX APRESENTA</div>
           <h1>O próximo resultado começa com a forma como te <em>preparas.</em></h1>
           <p className="hero-copy">Assiste à apresentação até ao fim e descobre como dar mais método, clareza e direcção à tua preparação para a prova.</p>
-          <div className="hero-meta"><span>▶</span> ASSISTE À APRESENTAÇÃO COMPLETA <b>•</b> ACESSO AO CHECKOUT AOS 90%</div>
+          <div className="hero-meta"><span>▶</span> ASSISTE À APRESENTAÇÃO COMPLETA <b>•</b> ACESSO AO CHECKOUT AOS 02:00</div>
         </section>
 
         <section className="video-section section-container" aria-label="Apresentação em vídeo">
@@ -77,14 +73,14 @@ export default function App() {
               <div className="video-placeholder">
                 <div className="play-mark">▶</div>
                 <strong>O vídeo de apresentação será disponibilizado aqui.</strong>
-                <span>Envia o ficheiro para <code>public/videos/vsl-mentorx.mp4</code>.</span>
+                <span>Verifica se o vídeo público do Vercel Blob está disponível.</span>
               </div>
             )}
           </div>
           <div className="watch-status">
             <div className="watch-status-top"><span>PROGRESSO DA APRESENTAÇÃO</span><strong>{Math.floor(progress)}%</strong></div>
             <div className="watch-track"><span style={{ width: progress + "%" }} /></div>
-            <p>{unlocked ? "Apresentação concluída até ao ponto necessário. O acesso à oferta foi desbloqueado." : "O botão de acesso à oferta será desbloqueado quando chegares aos 90% do vídeo."}</p>
+            <p>{unlocked ? "Apresentação concluída até ao ponto necessário. O acesso à oferta foi desbloqueado." : "O botão de acesso à oferta será desbloqueado quando o vídeo chegar aos 02:00."}</p>
           </div>
         </section>
 
@@ -92,7 +88,7 @@ export default function App() {
           {!unlocked ? (
             <div className="gate-locked">
               <div className="lock-icon">⌑</div>
-              <div><span className="gate-kicker">ACESSO RESERVADO</span><h2>A tua próxima etapa está quase disponível.</h2><p>Continua a assistir. O botão para avançar será libertado automaticamente aos 90% da apresentação.</p></div>
+              <div><span className="gate-kicker">ACESSO RESERVADO</span><h2>A tua próxima etapa está quase disponível.</h2><p>Continua a assistir. O botão para avançar será libertado automaticamente aos 02:00 da apresentação.</p></div>
               <div className="gate-percent">{Math.floor(progress)}<small>%</small></div>
             </div>
           ) : (
