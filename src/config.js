@@ -1,8 +1,11 @@
-// Quando recebermos o link da Kursinha, basta colocá-lo nesta variável.
+// Link público do checkout Kursinha (a configurar quando estiver disponível).
 export const CHECKOUT_URL = "";
 
-// O vídeo principal deve ser enviado para public/videos/vsl-mentorx.mp4
-export const VSL_VIDEO_PATH = "/videos/vsl-mentorx.mp4";
+// Vídeo alojado no Vercel Blob.
+export const VSL_VIDEO_PATH = "https://lavpesrljzio8imh.public.blob.vercel-storage.com/vsl-mentorx.mp4";
 
-// Imagem opcional: public/images/vsl-poster.jpg
+// Imagem opcional de capa: public/images/vsl-poster.jpg
 export const VSL_POSTER_PATH = "/images/vsl-poster.jpg";
+
+// O botão de checkout é desbloqueado aos 2 minutos de reprodução.
+export const VSL_UNLOCK_SECONDS = 120;
