@@ -1,5 +1,5 @@
-// Link público do checkout Kursinha (a configurar quando estiver disponível).
-export const CHECKOUT_URL = "";
+// Link de checkout da Kursinha.
+export const CHECKOUT_URL = "https://pay.kursinha.com/c/6b00813ebf57a979e416b939";
 
 // Vídeo alojado no Vercel Blob.
 export const VSL_VIDEO_PATH = "https://lavpesrljzio8imh.public.blob.vercel-storage.com/vsl-mentorx.mp4";
