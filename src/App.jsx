@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { CHECKOUT_URL, VSL_VIDEO_PATH, VSL_POSTER_PATH, VSL_UNLOCK_SECONDS } from "./config";
 
 const benefits = [
